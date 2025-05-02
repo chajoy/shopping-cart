@@ -2,4 +2,5 @@
 
 @theme {
   --font-header: "Silkscreen", "sans-serif";
+  --spacing-maxw: 2000px;
 }
