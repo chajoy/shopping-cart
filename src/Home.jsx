@@ -1,42 +1,34 @@
 import Button from "./components/Button";
 import trainer_1 from "./assets/trainer_1.png";
+import trainer_2 from "./assets/trainer_2.jpg";
 import ItemCard from "./components/ItemCard";
 import Carousel from "./components/Carousel";
 import useFetchAPI from "./Hooks/useFetchAPI";
 import heroBG from "./assets/hero-bg.jpg";
 import trendingPattern from "./assets/newinPattern.png";
 import Marquee from "./components/Marquee";
+import HeroTemplate from "./components/HeroTemplate";
 
 const Hero = () => {
-  return (
-    <div
-      style={{
-        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0), rgba(255, 255, 255, 1)), url(${heroBG})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-      }}
-    >
-      <div className="grid grid-cols-1 items-center justify-items-center xl:grid-cols-2 max-w-maxw m-auto ">
-        <div className="flex flex-col items-center text-center gap-5 order-last xl:order-first p-5">
-          <h1 className="font-header text-4xl sm:text-5xl 2xl:text-6xl">
-            Defined By Detail
-          </h1>
-          <p>
-            Precision-crafted fashion with purpose in every element. From sole
-            to stitch, it’s all in the details.
-          </p>
-          <Button to={"shop"}>Shop</Button>
-        </div>
-        <img
-          src={trainer_1}
-          alt="Photo of Trainer"
-          draggable="false"
-          className="w-150 xl:w-200 animate-float"
-        />
-      </div>
-    </div>
-  );
+  const content = {
+    flipped: true,
+    header: "Defined By Detail",
+    text: "Precision-crafted fashion with purpose in every element. From sole to stitch, it’s all in the details.",
+    image: {
+      title: "image of trainer",
+      src: trainer_1,
+      float: true,
+    },
+    button: <Button to={"shop"}>Shop</Button>,
+    backgroundStyle: {
+      backgroundImage: `linear-gradient(rgba(0, 0, 0, 0), rgba(255, 255, 255, 1)), url(${heroBG})`,
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      backgroundRepeat: "no-repeat",
+    },
+  };
+
+  return <HeroTemplate content={content} />;
 };
 
 const Trending = ({ trending, loading, error }) => {
@@ -87,6 +79,23 @@ const Trending = ({ trending, loading, error }) => {
   );
 };
 
+const Third = () => {
+  const content = {
+    flipped: false,
+    header: "Every Workout. Every Step.",
+    text: "From HIIT to cardio dance, treadmills to indoor cycling—whatever your style of fitness, there’s a SuperRep for that. Find the training shoe to match your workout.",
+    image: {
+      title: "image of trainer",
+      src: trainer_2,
+      float: false,
+    },
+    button: <Button to={"shop"}>Shop</Button>,
+    backgroundColor: "bg-pistachio",
+  };
+
+  return <HeroTemplate content={content} />;
+};
+
 const Home = () => {
   const { data, error, loading } = useFetchAPI(
     "https://fakestoreapi.com/products"
@@ -103,6 +112,7 @@ const Home = () => {
       <Hero />
       <Marquee toDisplay={"Sale on now"} />
       <Trending trending={trending} loading={loading} error={error} />
+      <Third />
     </>
   );
 };

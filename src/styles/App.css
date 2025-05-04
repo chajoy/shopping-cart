@@ -3,6 +3,7 @@
 @theme {
   --font-header: "Silkscreen", "sans-serif";
   --spacing-maxw: 2000px;
+  --color-pistachio: rgb(179 225 64);
 
   --animate-float: float 2s ease-in-out infinite alternate;
   --animate-marquee: marquee 20s linear infinite;
