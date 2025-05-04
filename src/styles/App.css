@@ -3,4 +3,22 @@
 @theme {
   --font-header: "Silkscreen", "sans-serif";
   --spacing-maxw: 2000px;
+
+  --animate-float: float 2s ease-in-out infinite alternate;
+  --animate-marquee: marquee 20s linear infinite;
+
+  @keyframes float {
+    100% {
+      transform: translateY(-5%);
+    }
+  }
+
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(calc(-100% + 40px));
+    }
+  }
 }
