@@ -3,7 +3,8 @@ import trainer_1 from "./assets/trainer_1.png";
 import trainer_2 from "./assets/trainer_2.jpg";
 import ItemCard from "./components/ItemCard";
 import Carousel from "./components/Carousel";
-import useFetchAPI from "./Hooks/useFetchAPI";
+import { useContext } from "react";
+import AppContext from "./AppContext";
 import heroBG from "./assets/hero-bg.jpg";
 import trendingPattern from "./assets/newinPattern.png";
 import Marquee from "./components/Marquee";
@@ -118,21 +119,17 @@ const Footer = () => {
 };
 
 const Home = () => {
-  const { data, error, loading } = useFetchAPI(
-    "https://fakestoreapi.com/products"
-  );
-
-  const filteredData = data
-    ? data.filter((i) => i.category === "men's clothing")
-    : [];
-
-  const trending = filteredData ? filteredData.slice(1, 4) : [];
+  const { data, loading, error } = useContext(AppContext);
 
   return (
     <>
       <Hero />
       <Marquee toDisplay={"Sale on now"} />
-      <Trending trending={trending} loading={loading} error={error} />
+      <Trending
+        trending={data ? data.slice(0, 3) : []}
+        loading={loading}
+        error={error}
+      />
       <Third />
       <Footer />
     </>

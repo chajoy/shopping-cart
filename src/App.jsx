@@ -2,6 +2,8 @@ import "./styles/App.css";
 import { Outlet, Link } from "react-router-dom";
 import Button from "./components/Button";
 import { useState, useEffect } from "react";
+import AppContext from "./AppContext";
+import useFetchAPI from "./Hooks/useFetchAPI";
 
 const Nav = ({ hasScrolled }) => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -73,6 +75,10 @@ const Nav = ({ hasScrolled }) => {
 function App() {
   const [hasScrolled, setHasScrolled] = useState(false);
 
+  const { data, error, loading } = useFetchAPI(
+    "https://fakestoreapi.com/products"
+  );
+
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY <= 0) {
@@ -93,8 +99,10 @@ function App() {
 
   return (
     <>
-      <Nav hasScrolled={hasScrolled} />
-      <Outlet />
+      <AppContext.Provider value={{ data, error, loading }}>
+        <Nav hasScrolled={hasScrolled} />
+        <Outlet />
+      </AppContext.Provider>
     </>
   );
 }

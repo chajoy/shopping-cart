@@ -15,7 +15,12 @@ const useFetchAPI = (url) => {
           throw new Error(`Error: Status ${response.status}`);
         }
         let data = await response.json();
-        setData(data);
+        let sanitisedData = data.map(({ title, price, image }) => ({
+          title,
+          price,
+          image,
+        }));
+        setData(sanitisedData);
         setError(null);
       } catch (err) {
         setError(err.message);
