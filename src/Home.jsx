@@ -3,12 +3,11 @@ import trainer_1 from "./assets/trainer_1.png";
 import trainer_2 from "./assets/trainer_2.jpg";
 import ItemCard from "./components/ItemCard";
 import Carousel from "./components/Carousel";
-import { useContext } from "react";
-import AppContext from "./AppContext";
 import heroBG from "./assets/hero-bg.jpg";
 import trendingPattern from "./assets/newinPattern.png";
 import Marquee from "./components/Marquee";
 import HeroTemplate from "./components/HeroTemplate";
+import { useOutletContext } from "react-router-dom";
 
 const Hero = () => {
   const content = {
@@ -119,7 +118,7 @@ const Footer = () => {
 };
 
 const Home = () => {
-  const { data, loading, error } = useContext(AppContext);
+  const { data, loading, error } = useOutletContext();
 
   return (
     <>

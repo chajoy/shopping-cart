@@ -2,7 +2,6 @@ import "./styles/App.css";
 import { Outlet, Link } from "react-router-dom";
 import Button from "./components/Button";
 import { useState, useEffect } from "react";
-import AppContext from "./AppContext";
 import useFetchAPI from "./Hooks/useFetchAPI";
 
 const Nav = ({ hasScrolled }) => {
@@ -99,10 +98,8 @@ function App() {
 
   return (
     <>
-      <AppContext.Provider value={{ data, error, loading }}>
-        <Nav hasScrolled={hasScrolled} />
-        <Outlet />
-      </AppContext.Provider>
+      <Nav hasScrolled={hasScrolled} />
+      <Outlet context={{ data, error, loading }} />
     </>
   );
 }
