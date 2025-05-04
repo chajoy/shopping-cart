@@ -22,7 +22,7 @@ const Nav = ({ hasScrolled }) => {
   return (
     <div
       className={`${
-        transparent ? "bg-transparent" : "bg-stone-100"
+        transparent ? "bg-transparent border-b-0" : "bg-stone-100 border-b-1"
       } fixed w-full z-1 transition-colors`}
     >
       <div className="flex h-[100px] gap-5 justify-end items-center relative p-10 max-w-maxw m-auto sm:justify-around">

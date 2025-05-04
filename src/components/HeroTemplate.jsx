@@ -5,7 +5,7 @@ const HeroTemplate = ({ content }) => {
       className={content.backgroundColor ? content.backgroundColor : ""}
     >
       <div
-        className={`grid grid-cols-1 items-center justify-items-center xl:grid-cols-2 max-w-maxw m-auto py-15`}
+        className={`grid grid-cols-1 items-center justify-items-center xl:grid-cols-2 max-w-maxw m-auto py-15 px-5`}
       >
         <div
           className={`flex flex-col items-center text-center gap-5 ${
