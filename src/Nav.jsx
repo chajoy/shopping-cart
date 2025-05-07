@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Button from "./components/Button";
 
-const Nav = ({ hasScrolled, setCartOpen }) => {
+const Nav = ({ hasScrolled, setCartOpen, cart }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [transparent, setTransparent] = useState(true);
 
@@ -37,11 +37,20 @@ const Nav = ({ hasScrolled, setCartOpen }) => {
         <Button to={"shop"} className="hidden sm:block mr-auto">
           Shop
         </Button>
-        <div className="relative">
-          <button onClick={() => setCartOpen((prev) => (prev = !prev))}>
-            <i className="bi bi-basket-fill text-2xl px-2 py-1 cursor-pointer bg-white outline-1 hover:bg-black hover:text-white outline-black"></i>
-          </button>
-        </div>
+        <button
+          onClick={() => setCartOpen((prev) => (prev = !prev))}
+          className="relative"
+        >
+          <i className="bi bi-basket-fill text-2xl px-2 py-1 cursor-pointer outline-1 bg-white  hover:bg-black hover:text-white outline-black"></i>
+          {cart.length > 0 ? (
+            <div>
+              <div className="absolute -right-2 top-7 bg-satsuma rounded-full px-1 outline-1 w-3 aspect-square"></div>
+              <div className="absolute -right-2 top-7 bg-satsuma rounded-full px-1 outline-1 w-3 aspect-square animate-ping"></div>
+            </div>
+          ) : (
+            ""
+          )}
+        </button>
         <button
           className="sm:hidden  bg-white w-10 outline-1 aspect-square flex items-center justify-center hover:bg-black hover:text-white outline-black"
           onClick={() => setMenuOpen((prev) => (prev = !prev))}

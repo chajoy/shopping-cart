@@ -35,7 +35,7 @@ function App() {
 
   return (
     <>
-      <Nav hasScrolled={hasScrolled} setCartOpen={setCartOpen} />
+      <Nav hasScrolled={hasScrolled} setCartOpen={setCartOpen} cart={cart} />
       <CartOverlay
         cart={{ data: cart, setCart, setCartOpen, cartOpen: cartOpen }}
       />

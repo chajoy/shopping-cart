@@ -1,6 +1,19 @@
 import { useOutletContext } from "react-router-dom";
 import Button from "./components/Button";
 
+const AddToCart = (cart, itemToAdd) => {
+  const cartCopy = [...cart.data];
+  if (itemToAdd.inCart >= 0) {
+    cartCopy[itemToAdd.inCart] = {
+      ...itemToAdd.item,
+      quantity: cartCopy[itemToAdd.inCart].quantity + itemToAdd.quantity,
+    };
+  } else {
+    cartCopy.push({ ...itemToAdd.item, quantity: itemToAdd.quantity });
+  }
+  cart.setCart(cartCopy);
+};
+
 const DeleteItem = (cart, itemToDelete, index = null) => {
   const cartCopy = [...cart.data];
   let _index = index;
@@ -29,7 +42,6 @@ const Quantity = (cart, itemToUpdate, add) => {
       quantity: itemToUpdate.quantity - 1,
     };
   }
-  console.log(`updated item ${itemToUpdate.id}`);
   cart.setCart(copyCart);
 };
 
@@ -108,4 +120,4 @@ const Cart = () => {
 
 export default Cart;
 
-export { Cart, CartOverlay };
+export { Cart, CartOverlay, AddToCart };

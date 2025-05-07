@@ -17,7 +17,7 @@ const Library = ({ data }) => {
     <div className="max-w-maxw m-auto">
       <div className="grid grid-cols-1 p-10 gap-10 md:grid-cols-2 xl:grid-cols-4 2xl:grid-cols-5">
         {data.map((item) => {
-          return <ItemCard item={item} hover />;
+          return <ItemCard key={item.id} item={item} hover />;
         })}
       </div>
     </div>
