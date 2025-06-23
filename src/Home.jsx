@@ -48,7 +48,6 @@ const Trending = ({ trending, loading, error }) => {
 
   return (
     <div
-      className="py-10 flex flex-col gap-10"
       style={{
         backgroundImage: `
           radial-gradient(circle, rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, 1) 80%),
@@ -59,21 +58,29 @@ const Trending = ({ trending, loading, error }) => {
         backgroundPosition: `center`,
       }}
     >
-      <h1 className="col-span-3 text-center font-bold text-4xl sm:text-5xl text-white">
-        TRENDING
-      </h1>
-      <div className="max-w-maxw m-auto text-white hidden flex-col items-center  lg:flex">
-        <div className="grid grid-cols-3 gap-10 mx-10 px-10">
-          {trending.map((item, index) => {
-            return <ItemCard item={item} key={index} hover={true}></ItemCard>;
-          })}
+      <div className="max-w-maxw m-auto flex flex-col gap-10 py-10 lg:p-10">
+        <h1 className="text-center font-bold text-4xl sm:text-5xl text-white">
+          TRENDING
+        </h1>
+        {loading ? (
+          <div></div>
+        ) : (
+          <div>
+            <div className="lg:grid grid-cols-3 gap-10 hidden">
+              {trending.map((item, index) => {
+                return (
+                  <ItemCard item={item} key={index} hover={true}></ItemCard>
+                );
+              })}
+            </div>
+            <Carousel className="block lg:hidden px-5" items={trending} />
+          </div>
+        )}
+        <div className="flex justify-center">
+          <Button invert to={"shop"}>
+            More
+          </Button>
         </div>
-      </div>
-      <Carousel className="block lg:hidden px-5" items={trending} />
-      <div className="flex justify-center">
-        <Button invert to={"shop"}>
-          More
-        </Button>
       </div>
     </div>
   );
@@ -96,27 +103,6 @@ const Third = () => {
   return <HeroTemplate content={content} />;
 };
 
-const Footer = () => {
-  return (
-    <div className="grid max-w-maxw m-auto px-10 py-5 gap-3">
-      <div className="flex gap-5 items-end">
-        <p>About</p>
-        <p>Support</p>
-        <p className="mr-auto">Contact</p>
-        <i className="bi bi-instagram text-2xl"></i>
-        <i className="bi bi-youtube text-2xl"></i>
-        <i className="bi bi-twitter-x text-2xl"></i>
-        <i className="bi bi-pinterest text-2xl"></i>
-        <i className="bi bi-facebook text-2xl"></i>
-      </div>
-      <hr />
-      <p className="justify-self-end">
-        © OUTFITTERS, 2025. All Rights Reserved
-      </p>
-    </div>
-  );
-};
-
 const Home = () => {
   const { data, loading, error } = useOutletContext();
 
@@ -130,7 +116,6 @@ const Home = () => {
         error={error}
       />
       <Third />
-      <Footer />
     </>
   );
 };

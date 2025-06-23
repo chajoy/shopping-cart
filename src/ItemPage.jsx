@@ -3,24 +3,59 @@ import { useOutletContext, useParams } from "react-router-dom";
 import Button from "./components/Button";
 import { AddToCart } from "./Cart";
 
-const Hero = () => {
-  return <div className="bg-[url(/shopbg.jpg)] bg-cover h-80"></div>;
-};
+const Item = ({ item, quantity, setQuantity, cart, loading = false }) => {
+  if (loading || !item) {
+    return (
+      <div className="grid lg:grid-cols-[40%_60%] max-w-maxw m-auto p-5 md:p-10 gap-10">
+        <div className="bg-black/50 aspect-square animate-pulse"></div>
+        <div className="flex flex-col gap-10 lg:p-10 items-center sm:items-start">
+          <div className="bg-black/50 animate-pulse h-10 w-[100%]"></div>
+          <div className="bg-black/50 animate-pulse h-10 w-[60%]"></div>
+          <div className="bg-black/50 animate-pulse h-10 w-[70%]"></div>
+          <div className="flex gap-10 items-center">
+            <button
+              className="outline-1 aspect-square w-8 hover:bg-black hover:text-white cursor-pointer"
+              onClick={() =>
+                setQuantity((prev) => {
+                  if (prev == 0) {
+                    return prev;
+                  } else {
+                    prev = prev - 1;
+                    return prev;
+                  }
+                })
+              }
+            >
+              -
+            </button>
+            <p>0</p>
+            <button
+              className="outline-1 aspect-square w-8 hover:bg-black hover:text-white cursor-pointer"
+              onClick={() => setQuantity((prev) => (prev = prev + 1))}
+            >
+              +
+            </button>
+          </div>
+          <Button>Add to Cart</Button>
+          <div className="bg-black/50 animate-pulse h-10 w-[50%]"></div>
+        </div>
+      </div>
+    );
+  }
 
-const Item = ({ item, quantity, setQuantity, cart }) => {
-  const inCart = cart.data.findIndex((i) => i.id === item.id);
+  const inCart = loading ? null : cart.data.findIndex((i) => i.id === item.id);
 
   return (
-    <div className="grid grid-cols-[30%_70%] max-w-maxw m-auto p-10">
+    <div className="grid lg:grid-cols-[40%_60%] max-w-maxw m-auto p-5 md:p-10 gap-10">
       <img
         src={item.image}
         alt={`photo of ${item.title}`}
-        className=" aspect-square object-cover object-top p-10"
+        className=" aspect-square object-cover object-top m-auto lg:w-[100%] sm:w-[80%] self-center border-1 border-stone-300"
       />
-      <div className="flex justify-center items-start flex-col gap-10 p-10">
-        <h1 className="font-header text-4xl">{item.title}</h1>
+      <div className="flex flex-col gap-10 lg:p-10 items-center sm:items-start">
+        <h1 className="font-header text-3xl sm:text-4xl">{item.title}</h1>
+        <p>{item.desc}</p>
         <p className="text-2xl">£{item.price.toFixed(2)}</p>
-        <p className="text-xl">{item.description}</p>
         <div className="flex gap-10 items-center">
           <button
             className="outline-1 aspect-square w-8 hover:bg-black hover:text-white cursor-pointer"
@@ -62,6 +97,7 @@ const Item = ({ item, quantity, setQuantity, cart }) => {
         >
           Add to Cart
         </Button>
+        <p className="text-xl">{item.description}</p>
       </div>
     </div>
   );
@@ -75,17 +111,13 @@ const ItemPage = () => {
 
   return (
     <div>
-      <Hero />
-      {loading ? (
-        "...loading"
-      ) : (
-        <Item
-          item={item}
-          quantity={quantity}
-          setQuantity={setQuantity}
-          cart={cart}
-        />
-      )}
+      <div className="bg-[url(/shopbg.jpg)] bg-cover h-[100px]"></div>
+      <Item
+        item={item}
+        quantity={quantity}
+        setQuantity={setQuantity}
+        cart={cart}
+      />
     </div>
   );
 };

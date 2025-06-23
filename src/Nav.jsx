@@ -21,7 +21,9 @@ const Nav = ({ hasScrolled, setCartOpen, cart }) => {
   return (
     <div
       className={`${
-        transparent ? "bg-transparent border-b-0" : "bg-stone-100 border-b-1"
+        transparent
+          ? "bg-transparent border-b-0"
+          : "bg-black/30 backdrop-blur-sm"
       } fixed w-full transition-colors z-1`}
     >
       <div className="flex h-[100px] gap-5 justify-end items-center relative p-10 max-w-maxw m-auto sm:justify-around">
@@ -29,7 +31,7 @@ const Nav = ({ hasScrolled, setCartOpen, cart }) => {
           to={"/"}
           className="mr-auto sm:absolute sm:translate-x-[-50%] left-[50%]"
         >
-          <h1 className="font-bold text-2xl">OUTFITTERS</h1>
+          <h1 className="font-bold text-2xl text-white">OUTFITTERS</h1>
         </Link>
         <Button to={"/"} className="hidden sm:block">
           Home

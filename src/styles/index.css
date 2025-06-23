@@ -8,6 +8,7 @@ body {
   font-family: "Afacad", sans-serif;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  user-select: none;
 }
 
 img,
